@@ -1,0 +1,8 @@
+
+{
+    "name": "gst-devenv",
+    "build": {
+        "dockerfile": "Dockerfile"
+         
+    }
+}
