@@ -6,13 +6,19 @@ pipeline {
         sh 'python3 --version'
       }
     }
-    stage('SonarQube Analysis'){
-     withSonarQubeEnv()
-     {
-        println ${env.SONAR_HOST_URL} 
-        //  sh "python3 CAT_WeeB/_Test1.py sonar:sonar"
-     }
+  stages {
+    stage('SonarQube analysis') {
+      steps {
+        script {
+          // requires SonarQube Scanner 2.8+
+          scannerHome = tool 'SonarQube Scanner 2.8'
+        }
+        withSonarQubeEnv('SonarQube Scanner') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
     }
+  }
 
     stage('Build') {
       steps {
