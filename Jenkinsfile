@@ -7,9 +7,10 @@ pipeline {
       }
     }
     stage('SonarQube Analysis'){
-     withSonarQubeEnv('sonar')
+     withSonarQubeEnv()
      {
-         sh "python3 CAT_WeeB/_Test1.py sonar:sonar"
+        println ${env.SONAR_HOST_URL} 
+        //  sh "python3 CAT_WeeB/_Test1.py sonar:sonar"
      }
     }
 
