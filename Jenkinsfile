@@ -8,8 +8,10 @@ pipeline {
     }
     stage('Sonar') {
       steps {
-        withSonarQubeEnv(installationName: 'SonarScan_Test') {
-          sh 'mvn clean package sonar:sonar'
+        script {
+          withSonarQubeEnv('SonarScan_Test') {
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
         }
       }
     }
