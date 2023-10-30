@@ -6,14 +6,10 @@ pipeline {
         sh 'python3 --version'
       }
     }
-    stage('SonarQube analysis') {
+    stage('Sonar') {
       steps {
-        script {
-          // requires SonarQube Scanner 2.8+
-          scannerHome = tool 'SonarQube Scanner 2.8'
-        }
-        withSonarQubeEnv('SonarQube Scanner') {
-          sh "${scannerHome}/bin/sonar-scanner"
+        withSonarQubeEnv(installationName: 'SonarScan_1') {
+          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.21155:sonar'
         }
       }
     }
