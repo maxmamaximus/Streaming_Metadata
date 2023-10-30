@@ -6,7 +6,6 @@ pipeline {
         sh 'python3 --version'
       }
     }
-  stages {
     stage('SonarQube analysis') {
       steps {
         script {
@@ -18,8 +17,6 @@ pipeline {
         }
       }
     }
-  }
-
     stage('Build') {
       steps {
         sh 'python3 CAT_WeeB/_Test1.py'
