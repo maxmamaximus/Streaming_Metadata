@@ -6,10 +6,17 @@ pipeline {
         sh 'python3 --version'
       }
     }
+    stage('SonarQube Analysis'){
+     withSonarQubeEnv('sonar')
+     {
+         sh "python3 CAT_WeeB/_Test1.py sonar:sonar"
+     }
+    }
+
     stage('Build') {
       steps {
-        // sh 'python3 CAT_WeeB/_Test1.py'
-        sh 'python -m py_compile CAT_WeeB/_Test1.py /home/sds/YBL_WS/build_Test1.exe'
+        sh 'python3 CAT_WeeB/_Test1.py'
+        // sh 'python -m py_compile CAT_WeeB/_Test1.py -x /home/sds/YBL_WS/build_Test1.pyc'
       }
     }
   }
