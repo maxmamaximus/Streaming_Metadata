@@ -1,27 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                // Check out your source code from your version control system
-                echo 'Check out'
-            }
-        }
-        stage('Build and Deploy') {
+        stage('Docker Build') {
             steps {
                 // Build the Docker image
                 script {
-                    def dockerImage = docker.build('Docker_Test_Build1')
+                    docker.build('doc_test_build1')
                 }
 
-                // Push the Docker image to a registry (if needed)
-                // sh 'docker push your-image-name:tag'
-
-                // Run the Docker container
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
                 script {
-                    dockerImage.inside {
-                        sh 'python ./src/_Test1.py'
-                    }
+                    // docker.image("your-image-name:tag").run("-p 8080:80 -d")
+                    docker.image("doc_test_build1").run()
                 }
             }
         }
