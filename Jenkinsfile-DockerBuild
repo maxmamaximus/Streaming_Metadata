@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Check out your source code from your version control system
+                echo 'Check out'
+            }
+        }
+        stage('Build and Deploy') {
+            steps {
+                // Build the Docker image
+                script {
+                    def dockerImage = docker.build('Docker_Test_Build1')
+                }
+
+                // Push the Docker image to a registry (if needed)
+                // sh 'docker push your-image-name:tag'
+
+                // Run the Docker container
+                script {
+                    dockerImage.inside {
+                        sh 'python ./src/_Test1.py'
+                    }
+                }
+            }
+        }
+    }
+}
