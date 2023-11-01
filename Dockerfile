@@ -7,7 +7,11 @@ ADD . /python-Test1
 WORKDIR . /python-Test1/src
 
 # Install any needed packages specified in requirements.txt
+RUN pip install --upgrade pip
 RUN pip install -r /python-Test1/requirements.txt
 
+# Image directory:
+RUN pwd
+
 # Define the command to run your application
-CMD ["python", "/python-Test1/src/_Test1.py"]
+CMD ["python", "/python-Test1/src/_FlaskInterface.py"]
