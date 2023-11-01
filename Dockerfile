@@ -1,17 +1,19 @@
 # Use an official Python runtime as a parent image
 FROM python:3.10.8
+ARG PATH_NANE=TATSU_on_Docker_Server
 
-ADD . /python-Test1
+ADD . /$PATH_NANE
 
 # Set the working directory inside the container
-WORKDIR . /python-Test1/src
+WORKDIR . /$PATH_NANE/src
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
-RUN pip install -r /python-Test1/requirements.txt
+RUN pip install -r /$PATH_NANE/requirements.txt
 
 # Image directory:
 RUN pwd
 
 # Define the command to run your application
-CMD ["python", "/python-Test1/src/_FlaskInterface.py"]
+ENV ENV_PATH_NAME = $PATH_NANE
+CMD ["python","/",$ENV_PATH_NAME,"/src/_FlaskInterface.py"]

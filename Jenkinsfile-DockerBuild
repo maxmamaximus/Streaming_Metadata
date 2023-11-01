@@ -4,7 +4,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build('doc_test_build1')
+                    docker.build('doc_server_test')
                 }
 
             }
@@ -12,7 +12,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("doc_test_build1").run()
+                    docker.image("doc_server_test").run()
                 }
             }
         }
