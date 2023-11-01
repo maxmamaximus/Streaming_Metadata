@@ -1,17 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     stages {
         stage('Docker Build') {
             steps {
-                // Build the Docker image
                 script {
-                    // docker.build('doc_test_build1')
-                    sh 'docker build -t doc_test_build1 .'
+                    docker.build('doc_test_build1')
                 }
 
             }
@@ -19,9 +12,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // docker.image("your-image-name:tag").run("-p 8080:80 -d")
-                    // docker.image("doc_test_build1").run()
-                     sh 'docker run doc_test_build1 '
+                    docker.image("doc_test_build1").run()
                 }
             }
         }
