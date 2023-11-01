@@ -10,11 +10,11 @@ WORKDIR . /$PATH_NANE/src
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
-RUN pip install -r /python-Test1/requirements.txt
+RUN pip install -r /$PATH_NANE/requirements.txt
 
 # Image directory:
 RUN pwd
 
 # Define the command to run your application
 ENV ENV_PATH_NAME = $PATH_NANE
-CMD ["python", "/", $ENV_PATH_NAME "/src/_FlaskRequest.py"]
+CMD ["python", "/", $ENV_PATH_NAME, "/src/_FlaskRequest.py"]
