@@ -14,4 +14,4 @@ RUN pip install -r /python-Test1/requirements.txt
 RUN pwd
 
 # Define the command to run your application
-# CMD ["python", "/python-Test1/src/_FlaskInterface.py"]
+CMD ["python", "/python-Test1/src/_FlaskInterface.py"]
