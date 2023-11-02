@@ -12,7 +12,6 @@ pipeline {
                     sh "docker rm ${env.containerName} || true"
                     sh "docker rmi ${env.imageName}:${env.imageTag}"
                     docker.build("${env.imageName}:${env.imageTag}")
-
                     // docker.build('doc_server_test:tatsu_server_test')
                 }
 
