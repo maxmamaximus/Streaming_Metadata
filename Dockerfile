@@ -13,4 +13,4 @@ RUN pip install -r /$PATH_NANE/requirements.txt
 
 # Define the command to run your application
 ENV ENV_PATH_NAME = $PATH_NANE
-CMD ["python", "$ENV_PATH_NAME/src/_FlaskInterface.py"]
+CMD ["python", "/$ENV_PATH_NAME/src/_FlaskInterface.py"]

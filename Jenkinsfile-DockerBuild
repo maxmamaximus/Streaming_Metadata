@@ -29,9 +29,6 @@ pipeline {
                         sh 'echo "This is a Docker container running in Jenkins"'
                     }
 
-                    // dockerContainer.stop()
-                    // dockerContainer.remove(force: true)
-                    // docker.image("doc_server_test").run()
                 }
             }
         }
