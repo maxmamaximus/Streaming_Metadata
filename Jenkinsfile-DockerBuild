@@ -4,7 +4,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build('doc_server_test')
+                    docker.build('doc_server_test:tatsu_server_test')
                 }
 
             }
