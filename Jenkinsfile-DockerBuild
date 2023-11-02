@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
 
-        stage('Initial') {
+        stage('Initial Pipeline ENV') {
             steps {
                 script {
                 env.imageName = 'doc_server_test'
@@ -53,11 +53,11 @@ pipeline {
                     // Define the container name
                     def dockerContainer =  docker.image("${env.imageName}").run("--name ${env.containerName}")
 
-                    // // Run additional commands inside the Docker container if needed
-                    // dockerContainer.inside {
-                    //     // You can run commands inside the Docker container
-                    //     sh 'echo "This is a Docker container running in Jenkins"'
-                    // }
+                    // Run additional commands inside the Docker container if needed
+                    dockerContainer.inside {
+                        // You can run commands inside the Docker container
+                        sh 'echo "This is a Docker container running in Jenkins"'
+                    }
 
                 }
             }
