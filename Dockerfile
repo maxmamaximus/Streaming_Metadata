@@ -11,9 +11,6 @@ WORKDIR . /$PATH_NANE/src
 RUN pip install --upgrade pip
 RUN pip install -r /$PATH_NANE/requirements.txt
 
-# Image directory:
-RUN pwd
-
 # Define the command to run your application
 ENV ENV_PATH_NAME = $PATH_NANE
 CMD ["python", "$ENV_PATH_NAME/src/_FlaskInterface.py"]
