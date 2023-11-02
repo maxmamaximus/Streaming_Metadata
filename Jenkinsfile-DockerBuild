@@ -6,7 +6,7 @@ pipeline {
                 script {
                     // Build and run the Docker container
                     env.imageName = 'doc_server_test:latest'
-                    env.dockerImage = docker.build(env.imageName)
+                    docker.build(env.imageName)
 
                     // docker.build('doc_server_test:tatsu_server_test')
                 }
