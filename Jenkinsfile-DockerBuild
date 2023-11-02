@@ -19,8 +19,8 @@ pipeline {
                 script {
                     // Define the container name
                     def containerName = 'AI_PLATFROM'
-                    def dockerContainer =  docker.image("${env.imageName}").run("--name AI_PLATFROM")
-                    
+                    def dockerContainer =  docker.image("${env.imageName}")
+                    dockerContainer.run("-name AI_PLATFROM")
                     // Run additional commands inside the Docker container if needed
                     // dockerContainer.inside {
                     //     // You can run commands inside the Docker container
