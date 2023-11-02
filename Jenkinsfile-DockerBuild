@@ -53,7 +53,6 @@ pipeline {
                     // Define the container name
                     def dockerContainer =  docker.image("${env.imageName}").run("--name ${env.containerName}")
 
-
                 }
             }
         }
