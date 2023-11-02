@@ -5,7 +5,8 @@ pipeline {
             steps {
                 script {
                     // Build and run the Docker container
-                    env.dockerImage = docker.build('doc_server_test:latest')
+                    env.imageName = 'doc_server_test:latest'
+                    env.dockerImage = docker.build(env.imageName)
 
                     // docker.build('doc_server_test:tatsu_server_test')
                 }
@@ -17,7 +18,7 @@ pipeline {
                 script {
                     // Define the container name
                     def containerName = 'AI_PLATFROM'
-                    def docImage = env.dockerImage
+                    def docImage = docker.image(env.imageName )
                     def dockerContainer = docImage.run("--name ${containerName}")
                     
                     // Run additional commands inside the Docker container if needed
