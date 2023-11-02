@@ -7,6 +7,7 @@ pipeline {
                     // Build and run the Docker container
                     env.imageName = 'doc_server_test'
                     env.imageTag = 'latest'
+                    sh "docker rmi ${imageName}:${imageTag}"
                     docker.build("${env.imageName}:${env.imageTag}")
 
                     // docker.build('doc_server_test:tatsu_server_test')
