@@ -8,7 +8,7 @@ pipeline {
                     env.imageName = 'doc_server_test'
                     env.imageTag = 'latest'
                     env.containerName = 'AI_PLATFROM'
-                    sh "docker stop ${env.containerName}"
+                    // sh "docker stop ${env.containerName}"
                     sh "docker rm ${env.containerName}"
                     sh "docker rmi ${env.imageName}:${env.imageTag}"
                     docker.build("${env.imageName}:${env.imageTag}")
