@@ -7,7 +7,10 @@ pipeline {
                     // Build and run the Docker container
                     env.imageName = 'doc_server_test'
                     env.imageTag = 'latest'
-                    sh "docker rmi ${imageName}:${imageTag}"
+                    env.containerName = 'AI_PLATFROM'
+                    sh "docker stop ${env.containerName} || true"
+                    // sh "docker rm ${env.containerName} || true"
+                    sh "docker rmi ${env.imageName}:${env.imageTag}"
                     docker.build("${env.imageName}:${env.imageTag}")
 
                     // docker.build('doc_server_test:tatsu_server_test')
@@ -19,8 +22,7 @@ pipeline {
             steps {
                 script {
                     // Define the container name
-                    def containerName = 'AI_PLATFROM'
-                    def dockerContainer =  docker.image("${env.imageName}").run("--name AI_PLATFROM")
+                    def dockerContainer =  docker.image("${env.imageName}").run("--name ${env.containerName}")
 
                     // // Run additional commands inside the Docker container if needed
                     // dockerContainer.inside {
