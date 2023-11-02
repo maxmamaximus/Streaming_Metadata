@@ -5,8 +5,9 @@ pipeline {
             steps {
                 script {
                     // Build and run the Docker container
-                    env.imageName = 'doc_server_test:latest'
-                    docker.build(env.imageName)
+                    env.imageName = 'doc_server_test'
+                    env.imageTag = 'latest'
+                    docker.build("${env.imageName}:${env.imageName}")
 
                     // docker.build('doc_server_test:tatsu_server_test')
                 }
