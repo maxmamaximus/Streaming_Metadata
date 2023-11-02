@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker Image Build') {
             steps {
                 script {
                     // Build and run the Docker container
@@ -47,17 +47,12 @@ pipeline {
 
             }
         }
-        stage('Run Docker Container') {
+        stage('Docker Container Build') {
             steps {
                 script {
                     // Define the container name
                     def dockerContainer =  docker.image("${env.imageName}").run("--name ${env.containerName}")
 
-                    // Run additional commands inside the Docker container if needed
-                    dockerContainer.inside {
-                        // You can run commands inside the Docker container
-                        sh 'echo "This is a Docker container running in Jenkins"'
-                    }
 
                 }
             }
