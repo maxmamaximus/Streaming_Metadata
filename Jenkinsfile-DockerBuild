@@ -1,18 +1,52 @@
 pipeline {
     agent any
     stages {
+
+        stages {
+            stage('Initial') {
+                steps {
+                    script {
+                    env.imageName = 'doc_server_test'
+                    env.imageTag = 'latest'
+                    env.containerName = 'AI_PLATFROM'
+                    }
+                }
+            }
+        }
+
+        stages {
+            stage('Stop and Remove Container') {
+                steps {
+                    script {
+                        // Define the container name you want to remove
+                        def containerName = env.containerName
+                        
+                        // Stop and remove the existing container if it exists
+                        sh "docker stop ${containerName} || true"
+                        sh "docker rm ${containerName} || true"
+                    }
+                }
+            }
+        }
+
+        stage('Remove Image') {
+            steps {
+                script {
+                    // Define the image name and tag you want to remove
+                    def imageName = env.imageName 
+                    def imageTag = env.imageTag 
+                    
+                    // Remove the existing image if it exists
+                    sh "docker rmi ${imageName}:${imageTag} || true"
+                }
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 script {
                     // Build and run the Docker container
-                    env.imageName = 'doc_server_test'
-                    env.imageTag = 'latest'
-                    env.containerName = 'AI_PLATFROM'
-                    // sh "docker stop ${env.containerName}"
-                    // sh "docker rm ${env.containerName}"
-                    // sh "docker rmi ${env.imageName}:${env.imageTag}"
                     docker.build("${env.imageName}:${env.imageTag}")
-                    // docker.build('doc_server_test:tatsu_server_test')
                 }
 
             }
@@ -24,10 +58,10 @@ pipeline {
                     def dockerContainer =  docker.image("${env.imageName}").run("--name ${env.containerName}")
 
                     // // Run additional commands inside the Docker container if needed
-                    dockerContainer.inside {
-                        // You can run commands inside the Docker container
-                        sh 'echo "This is a Docker container running in Jenkins"'
-                    }
+                    // dockerContainer.inside {
+                    //     // You can run commands inside the Docker container
+                    //     sh 'echo "This is a Docker container running in Jenkins"'
+                    // }
 
                 }
             }
