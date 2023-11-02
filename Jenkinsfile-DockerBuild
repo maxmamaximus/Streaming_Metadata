@@ -19,15 +19,17 @@ pipeline {
                 script {
                     // Define the container name
                     def containerName = 'AI_PLATFROM'
-                    def dockerContainer =  docker.image("${env.imageName}")
-                    dockerContainer.run()
-                    // Run additional commands inside the Docker container if needed
-                    // dockerContainer.inside {
-                    //     // You can run commands inside the Docker container
-                    //     sh 'echo "This is a Docker container running in Jenkins"'
-                    // }
+                    def dockerContainer =  docker.image("${env.imageName}").run("--name AI_PLATFROM")
 
-                    // docker.image("doc_server_test").run()
+                    // Run additional commands inside the Docker container if needed
+                    dockerContainer.inside {
+                        // You can run commands inside the Docker container
+                        sh 'echo "This is a Docker container running in Jenkins"'
+                    }
+
+                    dockerContainer.stop()
+                    dockerContainer.remove(force: true)
+                                        // docker.image("doc_server_test").run()
                 }
             }
         }
