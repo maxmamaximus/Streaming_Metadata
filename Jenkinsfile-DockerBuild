@@ -4,7 +4,10 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build('doc_server_test:tatsu_server_test')
+                    // Build and run the Docker container
+                    env.dockerImage = docker.build('doc_server_test:latest')
+
+                    // docker.build('doc_server_test:tatsu_server_test')
                 }
 
             }
@@ -12,7 +15,17 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("doc_server_test").run()
+                    // Define the container name
+                    def containerName = 'AI_PLATFROM'
+                    def dockerContainer = env.dockerImage.run("--name ${containerName}")
+                    
+                    // Run additional commands inside the Docker container if needed
+                    dockerContainer.inside {
+                        // You can run commands inside the Docker container
+                        sh 'echo "This is a Docker container running in Jenkins"'
+                    }
+
+                    // docker.image("doc_server_test").run()
                 }
             }
         }
